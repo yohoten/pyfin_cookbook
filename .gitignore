@@ -1,0 +1,41 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# ===== Jupyter =====
+.ipynb_checkpoints/
+
+# ===== 生成物 / 输出（各项目运行结果，可重新生成） =====
+**/output/
+**/outputs/
+*.pkl
+*.pickle
+.cache/
+
+# ===== 环境变量 =====
+.env
+.env.local
+
+# ===== IDE / 编辑器 =====
+.vs/
+.vscode/
+.idea/
+*.swp
+*.swo
+.workbuddy/
+
+# ===== 操作系统 =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 如需将实践报告（含个人信息）移出版本控制，取消下一行注释，
+# 并执行: git rm -r --cached report
+# report/

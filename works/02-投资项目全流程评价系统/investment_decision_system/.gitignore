@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# 测试与缓存
+.pytest_cache/
+.cache/
+*.pkl
+
+# 运行输出（charts/reports/run_log.txt 等均为生成物）
+outputs/
+
+# 环境变量
+.env
+.env.local
+
+# IDE / 编辑器
+.vscode/
+.idea/
+.vs/
+*.swp
+.workbuddy/
+
+# 操作系统
+.DS_Store
+Thumbs.db
+desktop.ini

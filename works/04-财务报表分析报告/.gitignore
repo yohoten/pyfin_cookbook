@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# 运行输出（charts/tables/报告 HTML 等均为生成物，可由 run_all.py 重新生成）
+output/
+
+# 原始/加工数据缓存（可由 fetch_data.py 重新获取）
+data/raw/
+data/processed/
+
+# 数据缓存文件
+*.pkl
+*.pickle
+.cache/
+
+# 环境变量
+.env
+.env.local
+
+# IDE / 编辑器
+.vscode/
+.idea/
+.vs/
+*.swp
+.workbuddy/
+
+# 操作系统
+.DS_Store
+Thumbs.db
+desktop.ini

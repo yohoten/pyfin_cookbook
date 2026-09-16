@@ -1,0 +1,15 @@
+# 投资项目决策自动化评价系统 — 依赖清单
+# 安装：pip install -r requirements.txt
+#
+# 说明：以下版本区间已在本项目开发环境实测通过
+# （Python 3.13.14 / numpy 2.5.2 / pandas 3.0.5 / matplotlib 3.11.1
+#   / scipy 1.18.1 / python-docx 1.2.0）
+
+numpy>=1.24
+scipy>=1.10
+pandas>=2.0
+matplotlib>=3.7
+python-docx>=1.1
+
+# 可选：单元测试使用（也可直接用标准库 unittest）
+# pytest>=7.4

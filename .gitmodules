@@ -1,0 +1,9 @@
+[submodule "works/01-货币时间价值与资本成本计算器/financial_calculator"]
+	path = works/01-货币时间价值与资本成本计算器/financial_calculator
+	url = https://github.com/yohoten/financial-calculator.git
+[submodule "works/03-综合成本与经营决策分析平台/cost_decision_platform"]
+	path = works/03-综合成本与经营决策分析平台/cost_decision_platform
+	url = https://github.com/yohoten/cost_decision_platform.git
+[submodule "works/05-财务预测与预算管理实验报告/Yongding_Forecast_Budget_2026"]
+	path = works/05-财务预测与预算管理实验报告/Yongding_Forecast_Budget_2026
+	url = https://github.com/yohoten/Yongding_Forecast_Budget_2026.git

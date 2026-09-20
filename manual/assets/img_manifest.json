@@ -1,0 +1,740 @@
+{
+ "p1_01.jpg": {
+  "src": "p1/01_复利增长曲线.png",
+  "w": 1754,
+  "h": 842,
+  "kb": 104
+ },
+ "p1_02.jpg": {
+  "src": "p1/02_年金现金流时间轴.png",
+  "w": 1704,
+  "h": 951,
+  "kb": 137
+ },
+ "p1_03.jpg": {
+  "src": "p1/03_债权资本成本曲线.png",
+  "w": 1583,
+  "h": 804,
+  "kb": 112
+ },
+ "p1_04_WACC.jpg": {
+  "src": "p1/04_WACC结构分解.png",
+  "w": 1800,
+  "h": 684,
+  "kb": 94
+ },
+ "p1_05_WACC.jpg": {
+  "src": "p1/05_WACC敏感性分析.png",
+  "w": 1320,
+  "h": 983,
+  "kb": 160
+ },
+ "p1_06.jpg": {
+  "src": "p1/06_资本结构优化对比.png",
+  "w": 1581,
+  "h": 773,
+  "kb": 91
+ },
+ "p1_08.jpg": {
+  "src": "p1/08_还款结构.png",
+  "w": 1732,
+  "h": 779,
+  "kb": 209
+ },
+ "p1_gui.jpg": {
+  "src": "p1/gui_场景页预览.png",
+  "w": 1440,
+  "h": 920,
+  "kb": 232
+ },
+ "p1_gui_2.jpg": {
+  "src": "p1/gui_总览页.png",
+  "w": 1440,
+  "h": 920,
+  "kb": 187
+ },
+ "p2_01_01_CASE-1_tornado_IND-A.jpg": {
+  "src": "p2/01_01_CASE-1_tornado_IND-A.png",
+  "w": 1800,
+  "h": 1154,
+  "kb": 133
+ },
+ "p2_01_02_CASE-1_tornado_IND-B.jpg": {
+  "src": "p2/01_02_CASE-1_tornado_IND-B.png",
+  "w": 1800,
+  "h": 1156,
+  "kb": 138
+ },
+ "p2_01_03_CASE-1_dual_IND-A.jpg": {
+  "src": "p2/01_03_CASE-1_dual_IND-A.png",
+  "w": 1697,
+  "h": 1220,
+  "kb": 142
+ },
+ "p2_01_04_CASE-1_npv_comparison.jpg": {
+  "src": "p2/01_04_CASE-1_npv_comparison.png",
+  "w": 1779,
+  "h": 1098,
+  "kb": 94
+ },
+ "p2_01_05_CASE-1_irr_vs_rate.jpg": {
+  "src": "p2/01_05_CASE-1_irr_vs_rate.png",
+  "w": 1800,
+  "h": 1117,
+  "kb": 117
+ },
+ "p2_01_06_CASE-1_cash_flows.jpg": {
+  "src": "p2/01_06_CASE-1_cash_flows.png",
+  "w": 1800,
+  "h": 993,
+  "kb": 121
+ },
+ "p2_02_01_CASE-2_mutual_MUT-LIFE.jpg": {
+  "src": "p2/02_01_CASE-2_mutual_MUT-LIFE.png",
+  "w": 1800,
+  "h": 667,
+  "kb": 100
+ },
+ "p2_02_02_CASE-2_mutual_MUT-SCALE.jpg": {
+  "src": "p2/02_02_CASE-2_mutual_MUT-SCALE.png",
+  "w": 1800,
+  "h": 667,
+  "kb": 90
+ },
+ "p2_02_03_CASE-2_tornado_MUT-P.jpg": {
+  "src": "p2/02_03_CASE-2_tornado_MUT-P.png",
+  "w": 1800,
+  "h": 1154,
+  "kb": 142
+ },
+ "p2_02_04_CASE-2_tornado_MUT-Q.jpg": {
+  "src": "p2/02_04_CASE-2_tornado_MUT-Q.png",
+  "w": 1800,
+  "h": 1154,
+  "kb": 142
+ },
+ "p2_02_05_CASE-2_tornado_MUT-X.jpg": {
+  "src": "p2/02_05_CASE-2_tornado_MUT-X.png",
+  "w": 1800,
+  "h": 1154,
+  "kb": 130
+ },
+ "p2_02_06_CASE-2_dual_MUT-Y.jpg": {
+  "src": "p2/02_06_CASE-2_dual_MUT-Y.png",
+  "w": 1696,
+  "h": 1220,
+  "kb": 146
+ },
+ "p2_02_07_CASE-2_npv_comparison.jpg": {
+  "src": "p2/02_07_CASE-2_npv_comparison.png",
+  "w": 1779,
+  "h": 1097,
+  "kb": 110
+ },
+ "p2_02_08_CASE-2_irr_vs_rate.jpg": {
+  "src": "p2/02_08_CASE-2_irr_vs_rate.png",
+  "w": 1800,
+  "h": 1117,
+  "kb": 125
+ },
+ "p2_02_09_CASE-2_cash_flows.jpg": {
+  "src": "p2/02_09_CASE-2_cash_flows.png",
+  "w": 1800,
+  "h": 994,
+  "kb": 140
+ },
+ "p2_03_01_CASE-3_portfolio.jpg": {
+  "src": "p2/03_01_CASE-3_portfolio.png",
+  "w": 1800,
+  "h": 818,
+  "kb": 113
+ },
+ "p2_03_02_CASE-3_tornado_CAP-A.jpg": {
+  "src": "p2/03_02_CASE-3_tornado_CAP-A.png",
+  "w": 1800,
+  "h": 1154,
+  "kb": 136
+ },
+ "p2_03_03_CASE-3_tornado_CAP-B.jpg": {
+  "src": "p2/03_03_CASE-3_tornado_CAP-B.png",
+  "w": 1800,
+  "h": 1154,
+  "kb": 140
+ },
+ "p2_03_04_CASE-3_tornado_CAP-C.jpg": {
+  "src": "p2/03_04_CASE-3_tornado_CAP-C.png",
+  "w": 1800,
+  "h": 1154,
+  "kb": 135
+ },
+ "p2_03_05_CASE-3_npv_comparison.jpg": {
+  "src": "p2/03_05_CASE-3_npv_comparison.png",
+  "w": 1778,
+  "h": 1097,
+  "kb": 149
+ },
+ "p2_03_06_CASE-3_irr_vs_rate.jpg": {
+  "src": "p2/03_06_CASE-3_irr_vs_rate.png",
+  "w": 1800,
+  "h": 1117,
+  "kb": 138
+ },
+ "p2_04_01_CASE-4_tornado_UNC-A.jpg": {
+  "src": "p2/04_01_CASE-4_tornado_UNC-A.png",
+  "w": 1800,
+  "h": 1156,
+  "kb": 131
+ },
+ "p2_04_02_CASE-4_tornado_UNC-B.jpg": {
+  "src": "p2/04_02_CASE-4_tornado_UNC-B.png",
+  "w": 1800,
+  "h": 1156,
+  "kb": 125
+ },
+ "p2_04_03_CASE-4_tornado_UNC-C.jpg": {
+  "src": "p2/04_03_CASE-4_tornado_UNC-C.png",
+  "w": 1800,
+  "h": 1154,
+  "kb": 130
+ },
+ "p2_04_04_CASE-4_dual_UNC-B.jpg": {
+  "src": "p2/04_04_CASE-4_dual_UNC-B.png",
+  "w": 1697,
+  "h": 1220,
+  "kb": 142
+ },
+ "p2_04_05_CASE-4_npv_comparison.jpg": {
+  "src": "p2/04_05_CASE-4_npv_comparison.png",
+  "w": 1780,
+  "h": 1098,
+  "kb": 103
+ },
+ "p2_04_06_CASE-4_irr_vs_rate.jpg": {
+  "src": "p2/04_06_CASE-4_irr_vs_rate.png",
+  "w": 1800,
+  "h": 1117,
+  "kb": 129
+ },
+ "p2_04_07_CASE-4_cash_flows.jpg": {
+  "src": "p2/04_07_CASE-4_cash_flows.png",
+  "w": 1800,
+  "h": 994,
+  "kb": 124
+ },
+ "p2_05_01_CASE-5_tornado_SENS-S.jpg": {
+  "src": "p2/05_01_CASE-5_tornado_SENS-S.png",
+  "w": 1800,
+  "h": 1154,
+  "kb": 142
+ },
+ "p2_05_02_CASE-5_tornado_SENS-W.jpg": {
+  "src": "p2/05_02_CASE-5_tornado_SENS-W.png",
+  "w": 1800,
+  "h": 1154,
+  "kb": 134
+ },
+ "p2_05_03_CASE-5_dual_SENS-W.jpg": {
+  "src": "p2/05_03_CASE-5_dual_SENS-W.png",
+  "w": 1697,
+  "h": 1220,
+  "kb": 147
+ },
+ "p2_05_04_CASE-5_npv_comparison.jpg": {
+  "src": "p2/05_04_CASE-5_npv_comparison.png",
+  "w": 1778,
+  "h": 1096,
+  "kb": 98
+ },
+ "p2_05_05_CASE-5_irr_vs_rate.jpg": {
+  "src": "p2/05_05_CASE-5_irr_vs_rate.png",
+  "w": 1800,
+  "h": 1117,
+  "kb": 118
+ },
+ "p2_05_06_CASE-5_cash_flows.jpg": {
+  "src": "p2/05_06_CASE-5_cash_flows.png",
+  "w": 1800,
+  "h": 994,
+  "kb": 143
+ },
+ "p2_06_01_CASE-6_tornado_P01.jpg": {
+  "src": "p2/06_01_CASE-6_tornado_P01.png",
+  "w": 1800,
+  "h": 1154,
+  "kb": 128
+ },
+ "p2_06_02_CASE-6_tornado_P02.jpg": {
+  "src": "p2/06_02_CASE-6_tornado_P02.png",
+  "w": 1800,
+  "h": 1154,
+  "kb": 132
+ },
+ "p2_06_03_CASE-6_tornado_P03.jpg": {
+  "src": "p2/06_03_CASE-6_tornado_P03.png",
+  "w": 1800,
+  "h": 1154,
+  "kb": 137
+ },
+ "p2_06_04_CASE-6_npv_comparison.jpg": {
+  "src": "p2/06_04_CASE-6_npv_comparison.png",
+  "w": 1800,
+  "h": 978,
+  "kb": 154
+ },
+ "p2_06_05_CASE-6_irr_vs_rate.jpg": {
+  "src": "p2/06_05_CASE-6_irr_vs_rate.png",
+  "w": 1800,
+  "h": 1117,
+  "kb": 151
+ },
+ "p3_01.jpg": {
+  "src": "p3/01_产品成本构成饼图.png",
+  "w": 1800,
+  "h": 879,
+  "kb": 99
+ },
+ "p3_02.jpg": {
+  "src": "p3/02_成本差异对比柱状图.png",
+  "w": 1774,
+  "h": 1260,
+  "kb": 101
+ },
+ "p3_03.jpg": {
+  "src": "p3/03_成本差异瀑布图.png",
+  "w": 1800,
+  "h": 692,
+  "kb": 107
+ },
+ "p3_04.jpg": {
+  "src": "p3/04_价差量差分解对比.png",
+  "w": 1800,
+  "h": 1147,
+  "kb": 112
+ },
+ "p3_05.jpg": {
+  "src": "p3/05_本量利分析图.png",
+  "w": 1800,
+  "h": 761,
+  "kb": 138
+ },
+ "p3_06.jpg": {
+  "src": "p3/06_混合成本分解拟合图.png",
+  "w": 1800,
+  "h": 1028,
+  "kb": 129
+ },
+ "p3_07.jpg": {
+  "src": "p3/07_成本习性分解图.png",
+  "w": 1800,
+  "h": 1090,
+  "kb": 125
+ },
+ "p3_08.jpg": {
+  "src": "p3/08_利润敏感性龙卷风图.png",
+  "w": 1800,
+  "h": 944,
+  "kb": 74
+ },
+ "p3_09.jpg": {
+  "src": "p3/09_利润情景矩阵热力图.png",
+  "w": 1800,
+  "h": 1245,
+  "kb": 127
+ },
+ "p3_10_ABC.jpg": {
+  "src": "p3/10_ABC与传统成本法对比.png",
+  "w": 1800,
+  "h": 1187,
+  "kb": 94
+ },
+ "p3_11.jpg": {
+  "src": "p3/11_经营方案利润对比.png",
+  "w": 1800,
+  "h": 1210,
+  "kb": 112
+ },
+ "p3_12.jpg": {
+  "src": "p3/12_差异分析结果表.png",
+  "w": 1800,
+  "h": 969,
+  "kb": 183
+ },
+ "p3_13.jpg": {
+  "src": "p3/13_特殊订单方案对比.png",
+  "w": 1800,
+  "h": 1208,
+  "kb": 91
+ },
+ "p3_14.jpg": {
+  "src": "p3/14_约束资源最优利用.png",
+  "w": 1800,
+  "h": 1190,
+  "kb": 117
+ },
+ "p3_15.jpg": {
+  "src": "p3/15_综合决策方案对比.png",
+  "w": 1800,
+  "h": 1210,
+  "kb": 111
+ },
+ "p3_16.jpg": {
+  "src": "p3/16_定价方法对比.png",
+  "w": 1800,
+  "h": 1193,
+  "kb": 114
+ },
+ "p3_17.jpg": {
+  "src": "p3/17_决策结果对比表.png",
+  "w": 1780,
+  "h": 639,
+  "kb": 102
+ },
+ "p4_01_asset_structure.jpg": {
+  "src": "p4/01_asset_structure.png",
+  "w": 1800,
+  "h": 649,
+  "kb": 106
+ },
+ "p4_02_liability_equity_structure.jpg": {
+  "src": "p4/02_liability_equity_structure.png",
+  "w": 1800,
+  "h": 651,
+  "kb": 104
+ },
+ "p4_03_income_structure.jpg": {
+  "src": "p4/03_income_structure.png",
+  "w": 1800,
+  "h": 678,
+  "kb": 82
+ },
+ "p4_04_revenue_profit_trend.jpg": {
+  "src": "p4/04_revenue_profit_trend.png",
+  "w": 1800,
+  "h": 653,
+  "kb": 96
+ },
+ "p4_05_index_trend.jpg": {
+  "src": "p4/05_index_trend.png",
+  "w": 1710,
+  "h": 735,
+  "kb": 112
+ },
+ "p4_06_cashflow_structure.jpg": {
+  "src": "p4/06_cashflow_structure.png",
+  "w": 1800,
+  "h": 653,
+  "kb": 94
+ },
+ "p4_07_solvency.jpg": {
+  "src": "p4/07_solvency.png",
+  "w": 1800,
+  "h": 653,
+  "kb": 104
+ },
+ "p4_08_operating_efficiency.jpg": {
+  "src": "p4/08_operating_efficiency.png",
+  "w": 1800,
+  "h": 653,
+  "kb": 99
+ },
+ "p4_09_profitability.jpg": {
+  "src": "p4/09_profitability.png",
+  "w": 1800,
+  "h": 653,
+  "kb": 100
+ },
+ "p4_10_dupont_factors.jpg": {
+  "src": "p4/10_dupont_factors.png",
+  "w": 1800,
+  "h": 654,
+  "kb": 104
+ },
+ "p4_11_dupont_waterfall.jpg": {
+  "src": "p4/11_dupont_waterfall.png",
+  "w": 1560,
+  "h": 705,
+  "kb": 60
+ },
+ "p4_12_shareholder_return.jpg": {
+  "src": "p4/12_shareholder_return.png",
+  "w": 1800,
+  "h": 653,
+  "kb": 102
+ },
+ "p5_10.jpg": {
+  "src": "p5/图10_模型回测误差.png",
+  "w": 1800,
+  "h": 654,
+  "kb": 91
+ },
+ "p5_11.jpg": {
+  "src": "p5/图11_预算利润表瀑布.png",
+  "w": 1618,
+  "h": 826,
+  "kb": 82
+ },
+ "p5_12.jpg": {
+  "src": "p5/图12_季度销售预算.png",
+  "w": 1239,
+  "h": 780,
+  "kb": 64
+ },
+ "p5_13.jpg": {
+  "src": "p5/图13_情景预算.png",
+  "w": 1800,
+  "h": 728,
+  "kb": 81
+ },
+ "p5_14.jpg": {
+  "src": "p5/图14_敏感性分析.png",
+  "w": 1415,
+  "h": 782,
+  "kb": 107
+ },
+ "p5_15.jpg": {
+  "src": "p5/图15_本量利分析.png",
+  "w": 1470,
+  "h": 758,
+  "kb": 112
+ },
+ "p5_16.jpg": {
+  "src": "p5/图16_历史与预算总览.png",
+  "w": 1469,
+  "h": 723,
+  "kb": 78
+ },
+ "p5_1.jpg": {
+  "src": "p5/图1_营业收入与增速.png",
+  "w": 1552,
+  "h": 723,
+  "kb": 97
+ },
+ "p5_2.jpg": {
+  "src": "p5/图2_收入成本毛利.png",
+  "w": 1469,
+  "h": 723,
+  "kb": 86
+ },
+ "p5_3.jpg": {
+  "src": "p5/图3_利润率趋势.png",
+  "w": 1479,
+  "h": 723,
+  "kb": 102
+ },
+ "p5_4.jpg": {
+  "src": "p5/图4_成本费用结构.png",
+  "w": 1800,
+  "h": 690,
+  "kb": 82
+ },
+ "p5_5.jpg": {
+  "src": "p5/图5_期间费用明细.png",
+  "w": 1800,
+  "h": 647,
+  "kb": 117
+ },
+ "p5_6.jpg": {
+  "src": "p5/图6_资本结构.png",
+  "w": 1543,
+  "h": 723,
+  "kb": 83
+ },
+ "p5_7.jpg": {
+  "src": "p5/图7_盈利质量.png",
+  "w": 1796,
+  "h": 697,
+  "kb": 87
+ },
+ "p5_8.jpg": {
+  "src": "p5/图8_收入预测.png",
+  "w": 1504,
+  "h": 723,
+  "kb": 67
+ },
+ "p5_9.jpg": {
+  "src": "p5/图9_模型预测对比.png",
+  "w": 1800,
+  "h": 574,
+  "kb": 95
+ },
+ "p5qc_all_charts.jpg": {
+  "src": "p5qc/all_charts.png",
+  "w": 1800,
+  "h": 1143,
+  "kb": 279
+ },
+ "p5qc_contact_sheet.jpg": {
+  "src": "p5qc/contact_sheet.png",
+  "w": 1800,
+  "h": 1139,
+  "kb": 232
+ },
+ "p5qc_fin_p01.jpg": {
+  "src": "p5qc/fin_p01.png",
+  "w": 951,
+  "h": 1345,
+  "kb": 74
+ },
+ "p5qc_fin_p31.jpg": {
+  "src": "p5qc/fin_p31.png",
+  "w": 951,
+  "h": 1345,
+  "kb": 183
+ },
+ "p5qc_final_p03.jpg": {
+  "src": "p5qc/final_p03.png",
+  "w": 927,
+  "h": 1310,
+  "kb": 99
+ },
+ "p5qc_final_p25.jpg": {
+  "src": "p5qc/final_p25.png",
+  "w": 927,
+  "h": 1310,
+  "kb": 144
+ },
+ "p5qc_final_p31.jpg": {
+  "src": "p5qc/final_p31.png",
+  "w": 927,
+  "h": 1310,
+  "kb": 175
+ },
+ "p5qc_final_p33.jpg": {
+  "src": "p5qc/final_p33.png",
+  "w": 927,
+  "h": 1310,
+  "kb": 62
+ },
+ "p5qc_p04_2-1.jpg": {
+  "src": "p5qc/p04_表2-1.png",
+  "w": 1034,
+  "h": 1462,
+  "kb": 200
+ },
+ "p5qc_p08_3-2.jpg": {
+  "src": "p5qc/p08_表3-2.png",
+  "w": 1034,
+  "h": 1462,
+  "kb": 145
+ },
+ "p5qc_p14_4-.jpg": {
+  "src": "p5qc/p14_表4-.png",
+  "w": 1034,
+  "h": 1462,
+  "kb": 149
+ },
+ "p5qc_p16_4-.jpg": {
+  "src": "p5qc/p16_表4-.png",
+  "w": 1034,
+  "h": 1462,
+  "kb": 200
+ },
+ "p5qc_p17_4-.jpg": {
+  "src": "p5qc/p17_表4-.png",
+  "w": 1034,
+  "h": 1462,
+  "kb": 90
+ },
+ "p5qc_p20_5-3.jpg": {
+  "src": "p5qc/p20_表5-3.png",
+  "w": 1034,
+  "h": 1462,
+  "kb": 135
+ },
+ "p5qc_p22_5-7.jpg": {
+  "src": "p5qc/p22_表5-7.png",
+  "w": 1034,
+  "h": 1462,
+  "kb": 176
+ },
+ "p5qc_p23_5-8.jpg": {
+  "src": "p5qc/p23_表5-8.png",
+  "w": 1034,
+  "h": 1462,
+  "kb": 191
+ },
+ "p5qc_p24_5-8.jpg": {
+  "src": "p5qc/p24_表5-8.png",
+  "w": 1034,
+  "h": 1462,
+  "kb": 181
+ },
+ "p5qc_p26_5-8.jpg": {
+  "src": "p5qc/p26_表5-8.png",
+  "w": 1034,
+  "h": 1462,
+  "kb": 216
+ },
+ "p5qc_page05.jpg": {
+  "src": "p5qc/page05.png",
+  "w": 910,
+  "h": 1287,
+  "kb": 129
+ },
+ "p5qc_page06.jpg": {
+  "src": "p5qc/page06.png",
+  "w": 910,
+  "h": 1287,
+  "kb": 7
+ },
+ "p5qc_page08.jpg": {
+  "src": "p5qc/page08.png",
+  "w": 910,
+  "h": 1287,
+  "kb": 117
+ },
+ "p5qc_page09.jpg": {
+  "src": "p5qc/page09.png",
+  "w": 910,
+  "h": 1287,
+  "kb": 125
+ },
+ "p5qc_page22.jpg": {
+  "src": "p5qc/page22.png",
+  "w": 910,
+  "h": 1287,
+  "kb": 147
+ },
+ "p5qc_page23.jpg": {
+  "src": "p5qc/page23.png",
+  "w": 910,
+  "h": 1287,
+  "kb": 160
+ },
+ "p5qc_page24.jpg": {
+  "src": "p5qc/page24.png",
+  "w": 910,
+  "h": 1287,
+  "kb": 142
+ },
+ "p5qc_page25.jpg": {
+  "src": "p5qc/page25.png",
+  "w": 910,
+  "h": 1287,
+  "kb": 49
+ },
+ "p5qc_toc.jpg": {
+  "src": "p5qc/toc.png",
+  "w": 993,
+  "h": 1404,
+  "kb": 150
+ },
+ "p5qc_v2_p05.jpg": {
+  "src": "p5qc/v2_p05.png",
+  "w": 976,
+  "h": 1380,
+  "kb": 116
+ },
+ "p5qc_v2_p23.jpg": {
+  "src": "p5qc/v2_p23.png",
+  "w": 976,
+  "h": 1380,
+  "kb": 154
+ },
+ "p5qc_v2_p24.jpg": {
+  "src": "p5qc/v2_p24.png",
+  "w": 976,
+  "h": 1380,
+  "kb": 190
+ }
+}

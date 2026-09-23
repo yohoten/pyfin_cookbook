@@ -445,11 +445,11 @@ def _appendix() -> List[str]:
         "pip install -r requirements.txt\n\n"
         "# 2. 运行全部案例\n"
         "python main.py --rate 0.10\n\n"
-        "# 3. 运行单元测试（校验 6 个案例的 30+ 项断言）\n"
+        "# 3. 运行单元测试（校验 6 个案例的 68 项断言）\n"
         "python -m tests.test_all\n"
         "```\n\n"
-        "依赖版本：Python ≥ 3.10、numpy ≥ 1.24、scipy ≥ 1.10、"
-        "pandas ≥ 2.0、matplotlib ≥ 3.7、python-docx ≥ 1.1。",
+        "依赖版本：Python ≥ 3.9（实测 3.9.13）、numpy ≥ 1.24,<3、scipy ≥ 1.10,<2、"
+        "pandas ≥ 2.0,<3、matplotlib ≥ 3.7,<4、python-docx ≥ 1.1,<2。",
     ]
 
 

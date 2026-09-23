@@ -6,7 +6,7 @@ __pycache__/
 build/
 dist/
 work/
-other pyfin/
+cases/财务自动化案例集/
 .venv/
 venv/
 env/
@@ -40,4 +40,4 @@ desktop.ini
 
 # 如需将实践报告（含个人信息）移出版本控制，取消下一行注释，
 # 并执行: git rm -r --cached report
-# report/
+report/

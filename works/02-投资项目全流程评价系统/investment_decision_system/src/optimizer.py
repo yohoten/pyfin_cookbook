@@ -31,9 +31,8 @@ optimizer.py — 项目优选与资本分配优化
 
 from __future__ import annotations
 
-import itertools
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Sequence, Tuple
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Sequence
 
 from .models import Evaluation, Project
 
@@ -270,6 +269,36 @@ class PortfolioResult:
         }
 
 
+def _check_budget(budget: float) -> float:
+    """校验资本限额，返回 float 化的额度。
+
+    Parameters
+    ----------
+    budget : float
+        资本限额（万元）。
+
+    Returns
+    -------
+    float
+        校验通过的额度。
+
+    Raises
+    ------
+    ValueError
+        额度为负数时抛出。额度为 0 是合法输入（表示"本期无可用资金"，
+        三种方法都会返回空组合），因此不作限制。
+    """
+    value = float(budget)
+    if value != value:                      # NaN 自查（NaN != NaN）
+        raise ValueError("资本限额不能为 NaN。")
+    if value < 0:
+        raise ValueError(
+            f"资本限额不能为负数，当前为 {value:,.2f} 万元。"
+            f"若本期无可用资金请传入 0。"
+        )
+    return value
+
+
 def ranking_method(
     projects: Sequence[Project],
     rate: float,
@@ -296,6 +325,8 @@ def ranking_method(
     再按 PI 降序依次装入，放得下就选、放不下就跳过。
     时间复杂度 O(n log n)，但 **不保证全局最优**。
     """
+    budget = _check_budget(budget)
+
     valid = [Evaluation.build(p, rate) for p in projects]
     valid = [e for e in valid if e.npv > 0]          # 负 NPV 项目直接排除
     ordered = sorted(valid, key=lambda e: e.pi, reverse=True)
@@ -321,7 +352,7 @@ def ranking_method(
         total_npv=total_npv,
         budget=budget,
         utilization=total_inv / budget if budget else 0.0,
-        idle_budget=budget - total_inv,
+        idle_budget=max(0.0, budget - total_inv),
         note="按盈利能力指数降序贪心装入；假设资金不可分割时可能非全局最优。",
     )
 
@@ -363,6 +394,8 @@ def combination_method(
 
     剪枝后实际搜索节点数远小于 2^n，可轻松处理 20 个项目以上。
     """
+    budget = _check_budget(budget)
+
     evals = [Evaluation.build(p, rate) for p in projects]
     # 负 NPV 项目一定不入选，提前剔除可大幅缩小搜索空间
     evals = [e for e in evals if e.npv > 0]
@@ -421,7 +454,7 @@ def combination_method(
         total_npv=total_npv,
         budget=budget,
         utilization=total_inv / budget if budget else 0.0,
-        idle_budget=budget - total_inv,
+        idle_budget=max(0.0, budget - total_inv),
         note=f"已搜索全部可行组合（候选 {n} 个项目），结果 **保证全局最优**。",
     )
 
@@ -461,6 +494,8 @@ def knapsack_method(
     ⚠️ 离散化会引入误差：单位取 1 万元时，组合投资额最多被高估 1 万元，
     一般情况下不影响最优组合的选取；追求严格精确时应使用组合法。
     """
+    budget = _check_budget(budget)
+
     evals = [Evaluation.build(p, rate) for p in projects]
     evals = [e for e in evals if e.npv > 0]
 
@@ -503,7 +538,7 @@ def knapsack_method(
         total_npv=total_npv,
         budget=budget,
         utilization=total_inv / budget if budget else 0.0,
-        idle_budget=budget - total_inv,
+        idle_budget=max(0.0, budget - total_inv),
         note=f"按 {unit:g} 万元离散化后动态规划求解；组合法已验证最优性时二者应一致。",
     )
 
@@ -560,6 +595,8 @@ def optimize_portfolio(
     全局最优的方法；排序法结果用于展示"贪心策略为何失效"；
     背包法结果用于交叉验证组合法的正确性。
     """
+    budget = _check_budget(budget)
+
     ranking = ranking_method(projects, rate, budget)
     combination = combination_method(projects, rate, budget)
     results: Dict[str, PortfolioResult] = {

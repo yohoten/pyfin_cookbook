@@ -44,7 +44,7 @@ IRR 的求解本质是求方程 NPV(r) = 0 的根。该方程等价于一个 n �
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Iterable, List, Optional, Sequence, Tuple
+from typing import List, Optional, Sequence, Tuple
 
 import numpy as np
 from scipy.optimize import brentq
@@ -271,9 +271,23 @@ def irr_all_roots(
     Returns
     -------
     list of float
-        升序排列的全部实根。
+        升序排列的全部实根。以下两种退化情形返回空列表（表示"IRR 无定义"）：
+
+        * 全部现金流为 0 —— 此时 NPV(r) ≡ 0，任意折现率都是根，IRR 无意义；
+        * 单期现金流 —— 直接用解析解 ``r = CF₁ / I₀ − 1``，避免数值求解的
+          末位精度损失（如 CF₁ = 300、I₀ = 100 应恰为 2.0，而非 1.9999999999999414）。
     """
     full_cf = build_full_cash_flows(cash_flows, initial_investment)
+
+    # 退化情形 1：全零现金流 → NPV 恒为 0，IRR 无定义
+    if not np.any(full_cf):
+        return []
+
+    # 退化情形 2：单期现金流 → 解析解，可精确到机器精度
+    if len(cash_flows) == 1 and initial_investment > 0:
+        root = float(cash_flows[0]) / float(initial_investment) - 1.0
+        return [root] if lower <= root <= upper else []
+
     rates = np.linspace(lower, upper, grid_points)
     values = np.array([npv_of_full(r, full_cf) for r in rates])
 

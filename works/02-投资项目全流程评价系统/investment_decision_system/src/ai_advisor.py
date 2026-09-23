@@ -43,7 +43,6 @@ import urllib.request
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Sequence
 
-from . import ai_data_generator as gen
 from .config import AI_API_KEY, AI_BASE_URL, AI_MODE, AI_MODEL
 from .models import Evaluation, Project
 from .sensitivity import SensitivityResult
@@ -643,10 +642,17 @@ def _build_by_rules(
         )
     elif verdict == VERDICT_INFEASIBLE:
         actions.append("**否决该方案**：当前参数下无法覆盖资本成本，不建议投入资金。")
+        # 注：inv_limit 可能为 None 或 NaN（临界值求解失败），不能用 `inv_limit or 0`
+        # 兜底 —— NaN 在布尔语境下为真值，会输出"需降至 nan 万元以内"。
+        inv_limit_safe = (
+            float(inv_limit)
+            if (inv_limit is not None and isinstance(inv_limit, float) and inv_limit == inv_limit)
+            else 0.0
+        )
         actions.append(
             "若战略上必须推进，需重新设计：压缩初始投资（当前 "
             f"{project.initial_investment:,.0f} 万元，需降至 "
-            f"{project.initial_investment * 1.0 * (1 + (inv_limit or 0)):,.0f} 万元以内）、"
+            f"{project.initial_investment * (1 + inv_limit_safe):,.0f} 万元以内）、"
             "延长寿命期或提升产能利用率以抬升年现金流。"
         )
     elif verdict == VERDICT_EDGE:

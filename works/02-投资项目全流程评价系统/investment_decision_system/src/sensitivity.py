@@ -44,7 +44,7 @@ from typing import Dict, List, Optional, Sequence, Tuple
 import numpy as np
 
 from . import finance_core as fc
-from .models import Evaluation, Project
+from .models import Project
 
 __all__ = [
     "FactorSensitivity",
@@ -277,16 +277,16 @@ def one_way_sensitivity(
     ))
 
     # ---------- 因素 4：项目寿命（±1 年） ----------
-    if include_life:
-        if project.life >= 2:
-            shorter = Project(
-                code=project.code + "-S", name=project.name, industry=project.industry,
-                initial_investment=project.initial_investment,
-                cash_flows=project.cash_flows[:-1],
-            )
-            npv_adverse = shorter.npv(rate)
-        else:
-            npv_adverse = float("nan")
+    # 寿命为 1 年时"缩短 1 年"没有意义（项目将不存在），因此该因素整体不生成，
+    # 而不是生成一条 adverse_npv = nan 的记录 —— nan 参与 tornado 图的排序
+    # 与 swing 比较时行为依赖实现，不可靠。
+    if include_life and project.life >= 2:
+        shorter = Project(
+            code=project.code + "-S", name=project.name, industry=project.industry,
+            initial_investment=project.initial_investment,
+            cash_flows=project.cash_flows[:-1],
+        )
+        npv_adverse = shorter.npv(rate)
         extended_flows = list(project.cash_flows) + [project.cash_flows[-1]]
         longer = Project(
             code=project.code + "-L", name=project.name, industry=project.industry,
@@ -302,7 +302,7 @@ def one_way_sensitivity(
             swing=abs(npv_favorable - npv_adverse),
             adverse_elasticity=(
                 ((npv_adverse - base_npv) / dollar_base) / (1.0 / project.life)
-                if project.life and not np.isnan(npv_adverse) else 0.0
+                if project.life else 0.0
             ),
             critical=(base_npv > 0 >= npv_adverse),
         ))

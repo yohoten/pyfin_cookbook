@@ -33,14 +33,20 @@ main.py — 投资项目决策自动化评价系统（主程序）
     ├── figures/    全部图表 PNG
     └── reports/    Markdown 报告 + Word 报告
 
+正式提交用的报告与图表另存于 ``docs/``（纳入版本库，见 ``docs/README.md``）。
+
 命令行参数
 ----------
 ``--rate``      基准折现率，默认 0.10
 ``--case``      仅运行指定案例（可重复指定），默认全部
 ``--list``      列出全部案例后退出
 ``--no-docx``   跳过 Word 导出
+``--no-advice`` 跳过 AI 决策建议生成
 ``--ai-mode``   决策文案通道：rule / auto / llm，默认 auto
-``--list``      列出案例清单
+
+退出码
+------
+``0`` 成功；``2`` 参数无效（折现率 ≤ −100%、案例不存在等）。
 """
 
 from __future__ import annotations
@@ -96,13 +102,15 @@ def _cash_flow_table(projects: Sequence) -> List[Dict]:
     Parameters
     ----------
     projects : Sequence[Project]
-        项目列表。
+        项目列表。空列表时返回空表（不抛错）。
 
     Returns
     -------
     list of dict
         适合直接渲染为 Markdown / Word 表格的行数据。
     """
+    if not projects:
+        return []
     max_life = max(p.life for p in projects)
     rows = []
     for p in projects:
@@ -166,14 +174,44 @@ def run_case(scenario: scenarios.Scenario, case_index: int,
     _print_section(f"案例 {scenario.key}：{scenario.name}（折现率 {rate:.2%}）")
 
     # ---------- 1. 全指标评价 ----------
-    evaluations = [Evaluation.build(p, rate) for p in projects]
+    # 按项目粒度容错：单个项目数据异常（如 cash_flows 为空）时跳过该项目，
+    # 而不是让整批案例中断 —— 批量评估是本系统的核心卖点（CASE-6 一次评 12 个项目）。
+    evaluations: List[Evaluation] = []
+    skipped: List[Dict] = []
+    for p in projects:
+        try:
+            evaluations.append(Evaluation.build(p, rate))
+        except (ValueError, ArithmeticError) as exc:
+            skipped.append({
+                "项目编号": p.code,
+                "项目名称": p.name,
+                "异常原因": str(exc),
+            })
+            print(f"  [跳过] 项目 {p.code} 数据异常：{exc}")
+    if skipped:
+        print(f"  ⚠️ 本案例有 {len(skipped)} 个项目因数据异常被跳过，"
+              f"其余 {len(evaluations)} 个项目评价结果不受影响。")
     _print_evaluation_table(evaluations)
+
+    if not evaluations:
+        print("  ⚠️ 本案例没有任何可评价的项目，跳过后续分析。")
+        return CaseReport(
+            key=scenario.key,
+            name=scenario.name,
+            teaching_point=scenario.teaching_point,
+            rate=rate,
+            budget=scenario.budget,
+            skipped=skipped,
+        )
+
+    # 后续分析只针对可评价的项目，避免退化数据传导到优化器与绘图
+    valid_projects = [e.project for e in evaluations]
 
     figures: List[Path] = []
     prefix = f"{case_index:02d}"
 
     # ---------- 2. 互斥项目优选 ----------
-    mutual_results = select_mutually_exclusive(projects, rate)
+    mutual_results = select_mutually_exclusive(valid_projects, rate)
     for mr in mutual_results:
         print(f"\n【互斥组 {mr.group}】{mr.recommendation.replace('**', '')}")
         if mr.incremental:
@@ -185,7 +223,7 @@ def run_case(scenario: scenarios.Scenario, case_index: int,
     # ---------- 3. 资本限额组合优化 ----------
     portfolio = None
     if scenario.budget is not None:
-        portfolio = optimize_portfolio(projects, rate, scenario.budget)
+        portfolio = optimize_portfolio(valid_projects, rate, scenario.budget)
         print("\n【资本限额组合优化】")
         for key, result in portfolio.results.items():
             print(f"  {key}：入选 {result.codes}｜投资 {result.total_investment:,.0f} 万元｜"
@@ -212,7 +250,7 @@ def run_case(scenario: scenarios.Scenario, case_index: int,
 
     # 双因素热力图：优先挑"最边缘"的项目（IRR 最接近折现率），教学价值最高
     candidates = [s for s in sensitivity_results if s.base_irr is not None and s.base_npv > 0]
-    if candidates and len(projects) <= 4:
+    if candidates and len(valid_projects) <= 4:
         target = min(candidates, key=lambda s: s.safety_margin)
         matrix, rate_axis, cf_axis = two_way_sensitivity(target.project, rate)
         figures.append(visualizer.plot_two_way_heatmap(
@@ -246,9 +284,9 @@ def run_case(scenario: scenarios.Scenario, case_index: int,
         filename=f"{prefix}_{len(figures) + 1:02d}_{scenario.key}_irr_vs_rate.png",
         highlight_rate=rate,
     ))
-    if len(projects) <= 6:
+    if len(valid_projects) <= 6:
         figures.append(visualizer.plot_cash_flows(
-            projects,
+            valid_projects,
             title=f"案例 {scenario.key}：各项目现金流结构对比",
             filename=f"{prefix}_{len(figures) + 1:02d}_{scenario.key}_cash_flows.png",
             rate=rate,
@@ -271,8 +309,9 @@ def run_case(scenario: scenarios.Scenario, case_index: int,
         sensitivity_results=sensitivity_results,
         advices=advices,
         figures=figures,
-        cash_flow_table=_cash_flow_table(projects),
+        cash_flow_table=_cash_flow_table(valid_projects),
         rate_sensitivity_table=rate_table,
+        skipped=skipped,
     )
 
 
@@ -326,6 +365,9 @@ def _method_notes() -> List[str]:
         "则该因素一旦不利变动将直接导致项目失效，属 **致命敏感因素**。",
 
         "### 2.6 AI 辅助功能\n"
+        "> **关于「AI 生成」的口径说明**：本系统的「AI 生成数据」指 **用行业知识构建参数区间，\n"
+        "> 再由程序在区间内约束采样**，而非由大模型逐条编造现金流数字；「AI 生成建议」指\n"
+        "> **规则引擎产出结论 + 大模型可选润色**。这是刻意的工程取舍，理由见下。\n\n"
         "**（1）AI 生成测试数据**：采用「行业原型约束 + 参数化生成」策略，\n"
         "基于 6 个行业的真实资本投资特征（新能源、半导体、生物医药、消费零售、\n"
         "公用事业、数字软件）构建参数区间，再按 steady / growth / jcurve / cycle\n"
@@ -342,7 +384,7 @@ def _method_notes() -> List[str]:
         "### 2.7 技术栈\n"
         "| 组件 | 用途 |\n"
         "| :--- | :--- |\n"
-        "| Python 3.13 | 主语言 |\n"
+        "| Python 3.9+ | 主语言（实测环境 3.9.13）|\n"
         "| NumPy | 现金流向量化折现计算 |\n"
         "| SciPy | Brent 法求解 IRR 方程实根 |\n"
         "| pandas | 数据表组织与 CSV 导出 |\n"
@@ -364,27 +406,37 @@ def _appendix() -> List[str]:
         "### 附录 B　程序包目录结构\n\n"
         "```\n"
         "investment_decision_system/\n"
-        "├── main.py                      主程序（一键全流程）\n"
-        "├── requirements.txt             依赖清单\n"
-        "├── README.md                    使用说明\n"
+        "├── main.py                        主程序（一键全流程）\n"
+        "├── requirements.txt               依赖清单（实测版本 + 区间上限）\n"
+        "├── pyproject.toml                 工程配置（ruff lint / mypy 类型检查）\n"
+        "├── README.md                      使用说明\n"
         "├── src/\n"
-        "│   ├── __init__.py              包说明与模块导航\n"
-        "│   ├── config.py                路径/字体/配色/参数配置\n"
-        "│   ├── finance_core.py          NPV、IRR、ANCF、PI、回收期、MIRR、增量IRR\n"
-        "│   ├── models.py                Project / Evaluation 数据结构\n"
-        "│   ├── ai_data_generator.py     AI 生成多行业多周期现金流数据\n"
-        "│   ├── scenarios.py             6 个教学测试案例\n"
-        "│   ├── optimizer.py             互斥优选 + 资本限额组合优化\n"
-        "│   ├── sensitivity.py           敏感性分析与临界点分析\n"
-        "│   ├── ai_advisor.py            AI 决策建议生成\n"
-        "│   ├── visualizer.py            图表绘制\n"
-        "│   └── report_generator.py      Markdown / Word 报告导出\n"
+        "│   ├── __init__.py                包说明与模块导航\n"
+        "│   ├── config.py                  路径/字体/配色/参数配置\n"
+        "│   ├── finance_core.py            NPV、IRR、ANCF、PI、回收期、MIRR、增量IRR\n"
+        "│   ├── models.py                  Project / Evaluation 数据结构\n"
+        "│   ├── ai_data_generator.py       AI 生成多行业多周期现金流数据\n"
+        "│   ├── scenarios.py               6 个教学测试案例\n"
+        "│   ├── optimizer.py               互斥优选 + 资本限额组合优化\n"
+        "│   ├── sensitivity.py             敏感性分析与临界点分析\n"
+        "│   ├── ai_advisor.py              AI 决策建议生成\n"
+        "│   ├── visualizer.py              图表绘制\n"
+        "│   └── report_generator.py        Markdown / Word 报告导出\n"
         "├── tests/\n"
-        "│   └── test_all.py              单元测试与案例断言\n"
-        "└── outputs/\n"
-        "    ├── data/                    数据 CSV\n"
-        "    ├── figures/                 图表 PNG\n"
-        "    └── reports/                 报告 Markdown / Word\n"
+        "│   ├── __init__.py                测试包标识\n"
+        "│   └── test_all.py                单元测试与案例断言\n"
+        "├── tools/\n"
+        "│   └── publish_docs.py            把 outputs/ 定稿产物发布到 docs/\n"
+        "├── docs/                          交付资产（纳入版本库）\n"
+        "│   ├── README.md                  交付资产说明与更新流程\n"
+        "│   ├── 投资项目决策评价报告.md\n"
+        "│   ├── 投资项目决策评价报告.docx\n"
+        "│   ├── figures/                   全部图表 PNG\n"
+        "│   └── data/                      projects.csv / evaluations.csv\n"
+        "└── outputs/                       运行产物（每次运行覆写，不入版本库）\n"
+        "    ├── data/                      数据 CSV\n"
+        "    ├── figures/                   图表 PNG\n"
+        "    └── reports/                   报告 Markdown / Word\n"
         "```",
 
         "### 附录 C　环境依赖与复现方式\n\n"
@@ -550,6 +602,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                         help="决策文案通道，默认 auto（无 API Key 时自动降级为规则引擎）")
     args = parser.parse_args(argv)
 
+    # 折现率必须大于 -100%，否则折现因子 (1+r)^t 无意义。
+    # 提前校验以给出干净的错误提示（与 argparse 的规范输出保持一致），
+    # 避免异常在深层调用栈中以 Traceback 形式暴露给使用者。
+    if args.rate <= -1.0:
+        print(f"\n[错误] 参数无效：折现率必须大于 -100%，当前为 {args.rate:.2%}。")
+        print("        示例：python main.py --rate 0.08")
+        return 2
+
     if args.ai_mode:
         # 通过环境变量控制，保持 config 的单一事实来源
         import os
@@ -564,18 +624,28 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             print(f"          知识点：{s.teaching_point}")
         return 0
 
+    # ---------- 选择案例 ----------
+    # 非法的 --case 值或无法构造的案例参数，统一转为友好提示 + 退出码 2
+    # （与 argparse 对 --rate abc 的处理一致），而不是抛出 Python 堆栈。
+    try:
+        if args.case:
+            selected = [scenarios.get_case(k, args.rate) for k in args.case]
+        else:
+            selected = scenarios.all_cases(args.rate)
+    except KeyError as exc:
+        print(f"\n[错误] {exc.args[0] if exc.args else exc}")
+        print("        可用案例清单：python main.py --list")
+        return 2
+    except (ValueError, TypeError) as exc:
+        print(f"\n[错误] 参数无效：{exc}")
+        return 2
+
     print("=" * 78)
     print("  投资项目决策自动化评价系统 v1.0")
     print(f"  NPV ｜ IRR ｜ 互斥项目优选 ｜ 资本限额组合优化 ｜ 敏感性分析")
     print(f"  基准折现率：{args.rate:.2%}　｜　AI 决策文案通道：{ai_advisor.AI_MODE}"
           f"{'（大模型可用）' if ai_advisor.LLM_AVAILABLE else '（未配置 API Key，使用规则引擎）'}")
     print("=" * 78)
-
-    # ---------- 选择案例 ----------
-    if args.case:
-        selected = [scenarios.get_case(k, args.rate) for k in args.case]
-    else:
-        selected = scenarios.all_cases(args.rate)
 
     # ---------- 逐案例运行 ----------
     use_llm = (ai_advisor.AI_MODE == "llm")
@@ -602,10 +672,16 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     # ---------- 汇总统计 ----------
     _print_section("运行完成")
-    total_figures = len(list(FIGURE_DIR.glob("*.png")))
+    # 图表数统计"本次生成"的数量。此前统计的是 FIGURE_DIR 下全部 PNG，
+    # 目录里若有历史残留文件会导致数字虚高（实测跑单案例后从 39 变 40）。
+    total_figures = sum(len(c.figures) for c in case_reports)
+    all_figures = len(list(FIGURE_DIR.glob("*.png")))
+    skipped_total = sum(len(c.skipped) for c in case_reports)
     print(f"  案例数：{len(case_reports)}")
     print(f"  项目数：{sum(len(c.evaluations) for c in case_reports)}")
-    print(f"  图表数：{total_figures}")
+    print(f"  图表数：{total_figures}（本次生成；图表目录累计 {all_figures} 张）")
+    if skipped_total:
+        print(f"  ⚠️ 跳过项目：{skipped_total} 个（数据异常，详见报告中的标注）")
     print(f"  报告输出：{REPORT_DIR}")
     print()
     return 0

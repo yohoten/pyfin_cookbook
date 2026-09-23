@@ -1,0 +1,62 @@
+[project]
+name = "investment-decision-system"
+version = "1.0.0"
+description = "投资项目决策自动化评价系统（NPV / IRR / 互斥优选 / 资本限额组合优化 / 敏感性分析）"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.24,<3",
+    "scipy>=1.10,<2",
+    "pandas>=2.0,<3",
+    "matplotlib>=3.7,<4",
+    "python-docx>=1.1,<2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.5",
+    "mypy>=1.10",
+]
+
+[tool.setuptools]
+packages = ["src", "tests"]
+
+# ----------------------------------------------------------------------
+# ruff —— lint（代码风格与潜在缺陷）
+# 用法：ruff check .        # 只检查
+#       ruff check . --fix  # 自动修复（含删除未使用导入）
+# ----------------------------------------------------------------------
+[tool.ruff]
+line-length = 110
+target-version = "py39"
+exclude = [".venv", "outputs", "docs"]
+
+[tool.ruff.lint]
+# E/W 风格、F 逻辑错误（含未使用导入）、I 导入排序、B 常见陷阱、UP 语法升级
+select = ["E", "W", "F", "I", "B", "UP"]
+ignore = [
+    "E501",     # 行长度由 line-length 统一提示，不单独报错
+    "B008",     # 函数默认值调用（本项目未使用该模式）
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["F401"]          # 测试文件允许为导入副作用而导入
+"src/__init__.py" = ["F401"]  # 包导航模块以导入清单作为文档
+
+# ----------------------------------------------------------------------
+# mypy —— 静态类型检查
+# 用法：mypy src main.py
+# ----------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.9"
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+check_untyped_defs = true
+no_implicit_optional = true
+ignore_missing_imports = true     # scipy / docx 等第三方存根可能缺失
+exclude = ["\\.venv/", "outputs/", "docs/"]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"

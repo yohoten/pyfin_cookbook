@@ -25,6 +25,7 @@ report_generator.py — 项目评价报告生成
 
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -36,9 +37,9 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
 
-from .ai_advisor import DecisionAdvice, summarize_advice
+from .ai_advisor import DecisionAdvice
 from .config import REPORT_DIR
-from .models import Evaluation, Project
+from .models import Evaluation
 from .optimizer import MutualGroupResult, OptimizationReport
 from .sensitivity import SensitivityResult
 
@@ -84,6 +85,9 @@ class CaseReport:
         项目现金流明细表。
     rate_sensitivity_table : list of dict
         折现率敏感性明细（可选）。
+    skipped : list of dict
+        因数据异常被跳过的项目，每项形如
+        ``{"项目编号": ..., "项目名称": ..., "异常原因": ...}``（可选）。
     """
 
     key: str
@@ -99,6 +103,7 @@ class CaseReport:
     figures: List[Path] = field(default_factory=list)
     cash_flow_table: List[Dict] = field(default_factory=list)
     rate_sensitivity_table: List[Dict] = field(default_factory=list)
+    skipped: List[Dict] = field(default_factory=list)
 
 
 @dataclass
@@ -186,11 +191,50 @@ def _fmt(value: Optional[float], digits: int = 2, suffix: str = "") -> str:
     return f"{value:,.{digits}f}{suffix}"
 
 
+def _rel_image(fig_path: Path, report_path: Path) -> str:
+    """计算图片相对 **报告文件自身** 的路径（统一正斜杠，跨平台）。
+
+    Parameters
+    ----------
+    fig_path : Path
+        图片文件的绝对路径。
+    report_path : Path
+        报告文件的绝对路径（尚未写入也可以）。
+
+    Returns
+    -------
+    str
+        可直接写入 Markdown 图片语法的相对路径，如 ``../figures/01_xxx.png``。
+
+    Notes
+    -----
+    基准取 **报告所在目录** 而非程序包根目录，因此报告无论输出到
+    ``outputs/reports/``、``docs/`` 还是临时目录，图片链接都成立。
+    早期版本用 ``REPORT_DIR.parent.parent`` 作基准，导致报告写在
+    ``outputs/reports/`` 时链接整体多出一层 ``outputs/``（39 处全部断链）。
+    """
+    try:
+        rel = os.path.relpath(Path(fig_path), start=Path(report_path).parent)
+    except ValueError:          # 不同驱动器（Windows 跨盘）时无法求相对路径
+        return Path(fig_path).as_posix()
+    return Path(rel).as_posix()
+
+
 # ======================================================================
 # 三、Markdown 渲染
 # ======================================================================
-def _case_markdown(case: CaseReport, index: int, root: Path) -> str:
-    """渲染单个案例的 Markdown 小节。"""
+def _case_markdown(case: CaseReport, index: int, report_path: Path) -> str:
+    """渲染单个案例的 Markdown 小节。
+
+    Parameters
+    ----------
+    case : CaseReport
+        案例报告数据。
+    index : int
+        案例序号（从 1 开始）。
+    report_path : Path
+        报告文件的最终路径，用于计算插图相对链接（见 :func:`_rel_image`）。
+    """
     parts: List[str] = []
     parts.append(f"## {index}. 案例 {case.key}：{case.name}")
     parts.append("")
@@ -202,6 +246,16 @@ def _case_markdown(case: CaseReport, index: int, root: Path) -> str:
     info.append(f"项目数量：**{len(case.evaluations)} 个**")
     parts.append("｜".join(info))
     parts.append("")
+
+    if case.skipped:
+        detail = "；".join(
+            f"{s['项目编号']}（{s['异常原因']}）" for s in case.skipped
+        )
+        parts.append(
+            f"> ⚠️ **数据异常、已跳过评价的项目（{len(case.skipped)} 个）**：{detail}。"
+            f"其余 {len(case.evaluations)} 个项目评价结果不受影响。"
+        )
+        parts.append("")
 
     # ---------- 3.1 项目基础数据 ----------
     parts.append("### 项目基础数据")
@@ -346,11 +400,7 @@ def _case_markdown(case: CaseReport, index: int, root: Path) -> str:
         parts.append("### 案例图表")
         parts.append("")
         for fig_path in case.figures:
-            try:
-                rel = fig_path.relative_to(root)
-            except ValueError:
-                rel = fig_path
-            parts.append(f"![{fig_path.stem}]({rel.as_posix()})")
+            parts.append(f"![{fig_path.stem}]({_rel_image(fig_path, report_path)})")
             parts.append("")
 
     return "\n".join(parts)
@@ -370,8 +420,13 @@ def render_markdown(bundle: ReportBundle, output_path: Optional[Path] = None) ->
     -------
     pathlib.Path
         生成的文件路径。
+
+    Notes
+    -----
+    插图链接以 **报告文件自身所在目录** 为基准计算（见 :func:`_rel_image`），
+    因此报告输出到 ``outputs/reports/`` 或 ``docs/`` 等任意位置时链接均可达。
     """
-    root = REPORT_DIR.parent.parent      # 程序包根目录，用于生成相对图片路径
+    path = output_path or (REPORT_DIR / f"{bundle.title}.md")
     lines: List[str] = []
     lines.append(f"# {bundle.title}")
     lines.append("")
@@ -400,7 +455,7 @@ def render_markdown(bundle: ReportBundle, output_path: Optional[Path] = None) ->
     lines.append("## 三、测试案例详解")
     lines.append("")
     for idx, case in enumerate(bundle.cases, start=1):
-        lines.append(_case_markdown(case, idx, root))
+        lines.append(_case_markdown(case, idx, path))
         lines.append("")
         lines.append("---")
         lines.append("")
@@ -414,7 +469,6 @@ def render_markdown(bundle: ReportBundle, output_path: Optional[Path] = None) ->
             lines.append("")
 
     content = "\n".join(lines)
-    path = output_path or (REPORT_DIR / f"{bundle.title}.md")
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
     return path
@@ -590,6 +644,17 @@ def render_docx(bundle: ReportBundle, output_path: Optional[Path] = None) -> Pat
         info.append(f"项目数量 {len(case.evaluations)} 个")
         _add_paragraph(doc, "｜".join(info), size=10,
                        color=RGBColor(0x44, 0x44, 0x44))
+
+        if case.skipped:
+            detail = "；".join(
+                f"{s['项目编号']}（{s['异常原因']}）" for s in case.skipped
+            )
+            _add_paragraph(
+                doc,
+                f"⚠️ 数据异常、已跳过评价的项目（{len(case.skipped)} 个）：{detail}。"
+                f"其余 {len(case.evaluations)} 个项目评价结果不受影响。",
+                size=9.5, color=RGBColor(0xB0, 0x3A, 0x2B),
+            )
 
         # 项目基础数据
         _add_heading(doc, "项目基础数据", level=3)

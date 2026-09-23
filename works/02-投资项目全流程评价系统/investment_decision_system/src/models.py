@@ -11,8 +11,8 @@ models.py — 数据结构定义
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Sequence
+from dataclasses import dataclass
+from typing import Dict, List, Optional
 
 import numpy as np
 
@@ -238,10 +238,48 @@ class Evaluation:
         Returns
         -------
         Evaluation
+
+        Raises
+        ------
+        ValueError
+            仅当 ``cash_flows`` 为空时抛出 —— 没有任何现金流就没有可评价的对象。
+            其他退化输入（如零/负初始投资）一律**降级**而非抛错，见 Notes。
+
+        Notes
+        -----
+        「降级而非崩溃」是批量评估场景的硬要求：CASE-6 一次性评价 12 个项目，
+        若某个项目的初始投资为 0 导致 ``PI`` 不可定义，不应中断其余 11 个项目。
+
+        处理规则：
+
+        * ``cash_flows`` 为空 → 抛 :class:`ValueError`（无法评价，调用方按项目粒度跳过）；
+        * ``initial_investment <= 0`` → ``PI`` 记为 ``nan``（不适用），
+          NPV / IRR / ANCF / 回收期 / MIRR 照常计算，可行性仅由 NPV 判定。
         """
+        if not project.cash_flows:
+            raise ValueError(f"项目 {project.code} 的 cash_flows 为空，无法评价。")
+
         npv_value = project.npv(rate)
         irr_result = project.irr_details()
         project_irr = irr_result.irr
+
+        # 零/负初始投资：PI 无定义，但不影响 NPV 与 IRR 的成立
+        if project.initial_investment <= 0:
+            return Evaluation(
+                project=project,
+                rate=rate,
+                npv=npv_value,
+                irr=project_irr,
+                irr_result=irr_result,
+                ancf=project.ancf(rate),
+                pi=float("nan"),          # 明确标记为"不适用"，而非抛错中断流程
+                static_payback=project.static_payback(),
+                dynamic_payback=project.dynamic_payback(rate),
+                mirr=project.mirr(rate),
+                feasible=npv_value > 0,
+                sign_changes=project.has_unconventional_sign_changes,
+            )
+
         # 可行性判定：
         #   * 常规现金流（IRR 唯一）→ NPV 与 IRR 双指标同时通过才视为可行；
         #   * 非常规现金流（IRR 多重或无解）→ IRR 判据失效，**仅以 NPV 为准**。
@@ -279,7 +317,7 @@ class Evaluation:
             "IRR": f"{self.irr:.2%}" if self.irr is not None else "无实根",
             "IRR唯一性": "唯一" if self.irr_result.is_unique else f"多重({len(self.irr_result.all_roots)}个)",
             "年金净流量ANCF(万元)": round(self.ancf, 2),
-            "盈利能力指数PI": round(self.pi, 4),
+            "盈利能力指数PI": round(self.pi, 4) if np.isfinite(self.pi) else "不适用",
             "静态回收期(年)": round(self.static_payback, 2) if self.static_payback else "寿命内未收回",
             "动态回收期(年)": round(self.dynamic_payback, 2) if self.dynamic_payback else "寿命内未收回",
             "MIRR": f"{self.mirr:.2%}" if np.isfinite(self.mirr) else "-",

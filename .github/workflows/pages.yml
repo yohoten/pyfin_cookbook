@@ -1,0 +1,66 @@
+# 把仓库根目录作为静态站点发布到 GitHub Pages。
+#
+# 为什么不用「Settings → Pages → Deploy from a branch」：
+#   仓库声明了 3 个 git 子模块，其路径含中文
+#   （works/01-货币时间价值与资本成本计算器/financial_calculator 等）。
+#   传统 Pages 构建流水线在 Checkout 阶段会初始化子模块，git 写入
+#   .git/modules/<中文路径>/config 时失败：
+#     could not lock config file ".../01-.../financial_calculator/config":
+#     No such file or directory   → git exit 255
+#   导致 build 作业在 Checkout 处中断，artifact 未上传、deploy 被跳过，站点始终 404。
+#
+# 本工作流用 actions/checkout 并显式设置 submodules: false，
+# 完全不触碰 .git/modules，从而绕开该问题；站点发布内容与
+# 「Deploy from a branch / main / root」完全一致（即整个仓库树）。
+
+name: Deploy static site to Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一时间只保留一个发布任务，避免并发写 Pages
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # 关键：不检出子模块（本站点只用仓库内已跟踪的静态文件）
+          submodules: false
+          fetch-depth: 1
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Report site size
+        run: |
+          set -euo pipefail
+          echo "待发布文件数：$(find . -path ./.git -prune -o -type f -print | wc -l)"
+          echo "待发布体积：$(du -sh --exclude=.git . | cut -f1)"
+          test -f index.html || { echo "缺少 index.html"; exit 1; }
+          test -f manual.html || { echo "缺少 manual.html"; exit 1; }
+
+      # upload-pages-artifact 内部打包时会自动排除 .git 与 .github
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

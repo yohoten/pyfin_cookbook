@@ -69,6 +69,15 @@ code,kbd,pre,.mono{font-family:ui-monospace,"SF Mono",SFMono-Regular,Consolas,"C
 [data-theme="dark"] .sun-i{display:block}[data-theme="dark"] .moon-i{display:none}
 .sun-i{display:none}.moon-i{display:block}
 @media (max-width:920px){.nav-links a.hide-m{display:none}}
+@media (max-width:640px){
+  .nav-links a.hide-s{display:none}
+  .nav-links{gap:1px}
+  .nav-links a{padding:6px 6px;font-size:13px}
+  .nav-links a .ext{display:none}
+  .brand span{font-size:14px;max-width:86px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .brand small{display:none}
+  .nav-inner{gap:10px;padding:0 14px}
+}
 
 /* ---------- 按钮 ---------- */
 .btn{

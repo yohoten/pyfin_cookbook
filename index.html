@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Python 财务应用 · 课程实践合集 | pyfin_cookbook</title>
-<meta name="description" content="《Python 在财务管理中的应用》课程实践合集：5 个综合实验项目、12 章 44 份课件、随堂 Notebook、194 页项目操作手册，全部开源可复现。">
+<meta name="description" content="《Python 在财务管理中的应用》课程实践合集：5 个综合实验项目、12 章 44 份课件、随堂 Notebook、196 页项目操作手册，全部开源可复现。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f5c8f'/%3E%3Cpath d='M12 46 L26 30 L36 38 L52 16' stroke='%23fff' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='52' cy='16' r='5' fill='%232dd4bf'/%3E%3C/svg%3E">
 <script>
 (function(){document.documentElement.classList.add('js');try{var t=localStorage.getItem('pf-theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
@@ -24,6 +24,7 @@
     </a>
     <nav class="nav-links">
       <a href="#projects">综合项目</a>
+      <a href="#manual-toc">手册目录</a>
       <a href="#courseware" class="hide-m">课件库</a>
       <a href="#notebooks" class="hide-m">随堂练习</a>
       <a href="#report" class="hide-m">实践报告</a>
@@ -46,7 +47,7 @@
       <div>
         <span class="eyebrow">《Python 在财务管理中的应用》课程实践合集</span>
         <h1>把财务管理课的作业，<br>做成能跑起来的 <span class="grad">Python 项目</span></h1>
-        <p class="lead">5 个综合实验项目、12 章 44 份课程课件、随堂 Notebook，以及一本 194 页、关键数值逐条复算核对过的《项目操作手册》——从环境搭建到结果复核，全部开源、可复现。</p>
+        <p class="lead">5 个综合实验项目、12 章 44 份课程课件、随堂 Notebook，以及一本 196 页、关键数值逐条复算核对过的《项目操作手册》——从环境搭建到结果复核，全部开源、可复现。</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="manual.html">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
@@ -119,7 +120,7 @@
     <div class="stats-inner">
       <div class="stat"><div class="num">5</div><div class="lbl">综合实验项目</div></div>
       <div class="stat"><div class="num">44</div><div class="lbl">课件 PDF · 12 章</div></div>
-      <div class="stat"><div class="num">194</div><div class="lbl">页项目操作手册</div></div>
+      <div class="stat"><div class="num">196</div><div class="lbl">页项目操作手册</div></div>
       <div class="stat"><div class="num">11</div><div class="lbl">附录速查 A–K</div></div>
     </div>
   </div>
@@ -153,7 +154,7 @@ python main.py</pre>
     </div>
     <div class="callout reveal">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-      <div><b>提示</b>：项目 04 的 <code>fetch_data.py</code> 需联网采集美的集团财报；项目 05 已内置数据快照，可 <code>python run_all.py --skip-fetch</code> 离线复现。遇到报错先翻<a href="manual.html#ch8"><b>手册第 8 章·排障总表</b></a>。</div>
+      <div><b>提示</b>：项目 04 的 <code>fetch_data.py</code> 需联网采集美的集团财报；项目 05 已内置数据快照，可 <code>python run_all.py --skip-fetch</code> 离线复现。遇到报错先翻<a href="manual.html#ch-8"><b>手册第 8 章·排障总表</b></a>。</div>
     </div>
   </div>
 </section>
@@ -171,7 +172,7 @@ python main.py</pre>
       <article class="proj-card reveal" style="--pc:#0f5c8f">
         <div class="proj-no">01</div>
         <div class="proj-body">
-          <h3>货币时间价值与资本成本计算器 <a class="btn btn-ghost btn-sm" href="manual.html#ch2" style="margin-left:auto">📖 手册第 2 章</a></h3>
+          <h3>货币时间价值与资本成本计算器 <a class="btn btn-ghost btn-sm" href="manual.html#ch-2" style="margin-left:auto">📖 手册第 2 章</a></h3>
           <div class="meta">对应课程：第 3 章 货币时间价值 · 第 4 章 资本成本分析</div>
           <p>复利与年金、债权/股权资本成本、WACC 的一键式批量计算：三层校验规则库、7 类 Matplotlib 图表、Excel / Markdown 导出，以及 7 场景 + 总览页的 tkinter 图形界面。51 项断言的数值自检用例随仓库交付。</p>
           <div class="proj-tags"><span class="ptag t-sub">Git 子模块</span><span class="ptag t-gui">tkinter GUI</span><span class="ptag t-test">51 项断言</span><span class="ptag">Python 3.9.13 实测</span></div>
@@ -187,7 +188,7 @@ python main.py</pre>
       <article class="proj-card reveal" style="--pc:#0d9488">
         <div class="proj-no">02</div>
         <div class="proj-body">
-          <h3>投资项目全流程评价系统 <a class="btn btn-ghost btn-sm" href="manual.html#ch3" style="margin-left:auto">📖 手册第 3 章</a></h3>
+          <h3>投资项目全流程评价系统 <a class="btn btn-ghost btn-sm" href="manual.html#ch-3" style="margin-left:auto">📖 手册第 3 章</a></h3>
           <div class="meta">对应课程：第 5 章 投资项目评价</div>
           <p>NPV / IRR / 回收期全流程指标，独立项目可行性、互斥项目优选（增量 IRR 治规模冲突、年金净流量治寿命冲突）、资本限额组合优化、敏感性与情景分析；39 张图表按固定模板命名，57 个测试方法全绿交付。</p>
           <div class="proj-tags"><span class="ptag">普通目录（本仓库）</span><span class="ptag t-test">57 个测试方法</span><span class="ptag">python-docx 报告</span></div>
@@ -203,7 +204,7 @@ python main.py</pre>
       <article class="proj-card reveal" style="--pc:#b45309">
         <div class="proj-no">03</div>
         <div class="proj-body">
-          <h3>综合成本与经营决策分析平台 <a class="btn btn-ghost btn-sm" href="manual.html#ch4" style="margin-left:auto">📖 手册第 4 章</a></h3>
+          <h3>综合成本与经营决策分析平台 <a class="btn btn-ghost btn-sm" href="manual.html#ch-4" style="margin-left:auto">📖 手册第 4 章</a></h3>
           <div class="meta">对应课程：第 7 章 成本管理 · 第 8 章 本量利分析 · 第 9 章 短期经营决策</div>
           <p>以「恒信精密制造」数据底座串起十三个步骤：费用归集分配、辅助生产三种分配方法、ABC 作业成本法、三种产品成本计算、标准成本差异、混合成本分解、本量利与五类短期经营决策；内置会计舍入纪律，自动生成图表与分析底稿。</p>
           <div class="proj-tags"><span class="ptag t-sub">Git 子模块</span><span class="ptag t-test">9 类 51 个测试</span><span class="ptag">statsmodels 回归</span></div>
@@ -219,7 +220,7 @@ python main.py</pre>
       <article class="proj-card reveal" style="--pc:#c2412c">
         <div class="proj-no">04</div>
         <div class="proj-body">
-          <h3>财务报表分析报告 <a class="btn btn-ghost btn-sm" href="manual.html#ch5" style="margin-left:auto">📖 手册第 5 章</a></h3>
+          <h3>财务报表分析报告 <a class="btn btn-ghost btn-sm" href="manual.html#ch-5" style="margin-left:auto">📖 手册第 5 章</a></h3>
           <div class="meta">对应课程：第 10 章 财务报表分析 · 标的：美的集团 000333.SZ</div>
           <p>东方财富 F10 为主源、新浪财经为核对源采集三张报表（2021–2025），先做数据质量校验，再完成共同比结构、定基/环比/CAGR 趋势、五类 40 项指标与杜邦三因素/五因素拆解，最终生成 HTML 分析报告。</p>
           <div class="proj-tags"><span class="ptag">普通目录（本仓库）</span><span class="ptag">需联网采集</span><span class="ptag">五类 40 项指标</span></div>
@@ -235,7 +236,7 @@ python main.py</pre>
       <article class="proj-card reveal" style="--pc:#6d28d9">
         <div class="proj-no">05</div>
         <div class="proj-body">
-          <h3>财务预测与预算管理实验报告 <a class="btn btn-ghost btn-sm" href="manual.html#ch6" style="margin-left:auto">📖 手册第 6 章</a></h3>
+          <h3>财务预测与预算管理实验报告 <a class="btn btn-ghost btn-sm" href="manual.html#ch-6" style="margin-left:auto">📖 手册第 6 章</a></h3>
           <div class="meta">对应课程：第 11 章 财务预测与预算管理 · 标的：永鼎股份 600105</div>
           <p>44 个报告期（2016Q1 起）历史面板，三层递进的预测方法论（含回测），2026 年八件套预算编制（销售/季度分解/利润表/现金流量表…）、本量利三法取舍、三档情景预算与敏感性弹性矩阵，一键复现全流程并生成 Word 报告与质检。</p>
           <div class="proj-tags"><span class="ptag t-sub">Git 子模块</span><span class="ptag">数据快照可离线</span><span class="ptag">16 张图表</span></div>
@@ -256,16 +257,117 @@ python main.py</pre>
 <section class="sec">
   <div class="container">
     <div class="manual-banner reveal">
-      <div class="mb-eyebrow">OPERATIONS MANUAL · 194 页 · 第三稿</div>
+      <div class="mb-eyebrow">OPERATIONS MANUAL · 196 页 · 第三稿</div>
       <h2>《Python 财务应用项目操作手册》</h2>
       <p>五个项目从环境搭建到结果复核的「保姆级」指南：每个项目的三分钟跑通、逐场景操作、图表怎么读、数值自检，以及从零动手重写一遍的完整路径。关键数值均经逐条复算核对。</p>
       <div class="mb-cta">
         <a class="btn btn-primary" href="manual.html">📖 在线阅读 / 下载手册</a>
-        <a class="btn btn-ghost" href="manual/Python%E8%B4%A2%E5%8A%A1%E5%BA%94%E7%94%A8%E9%A1%B9%E7%9B%AE%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C%EF%BC%88%E7%BC%96%E5%86%99%E6%8C%87%E5%AF%BC%E7%89%88%C2%B7%E7%AC%AC%E4%B8%89%E7%A8%BF%EF%BC%89.pdf" target="_blank" rel="noopener">直接下载 PDF（14 MB）</a>
+        <a class="btn btn-ghost" href="manual/Python%E8%B4%A2%E5%8A%A1%E5%BA%94%E7%94%A8%E9%A1%B9%E7%9B%AE%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C%EF%BC%88%E7%BC%96%E5%86%99%E6%8C%87%E5%AF%BC%E7%89%88%C2%B7%E7%AC%AC%E4%B8%89%E7%A8%BF%EF%BC%89.pdf" target="_blank" rel="noopener">直接下载 PDF（13.6 MB）</a>
       </div>
       <div class="mb-facts">
-        <span><b>前言 + 8 章</b>正文</span><span><b>附录 A–K</b>命令 / 公式 / 可视化 / GUI / 方法论</span><span><b>8 章</b>排障总表</span>
+        <span><b>前言 + 8 章</b>正文</span><span><b>附录 A–K</b>命令 / 公式 / 可视化 / GUI / 方法论</span><span><b>144 节</b>全文在线阅读</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 手册目录 ================= -->
+<section class="sec alt" id="manual-toc">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">Manual Contents</div>
+      <h2>手册目录与附录速查 <span style="color:var(--text-3);font-weight:600;font-size:.62em;vertical-align:middle">114 图 · 117 表 · 全文检索</span></h2>
+      <p>点击任意章节或附录，直接进入在线阅读器的对应位置；在阅读器里按 <kbd>/</kbd> 或点右上角「检索正文」可对全书正文做全文检索（含表格、提示框与代码）。</p>
+    </div>
+    <div class="ch-grid">
+<article class="ch-card reveal" id="ch-0" style="--cc:#0f5c8f">
+<div class="ch-top"><div class="ch-no">前言</div><h3>前言：怎样用这本手册</h3></div>
+<p>这本手册解决什么问题、五个项目的定位与阅读顺序、全书约定，以及只有 30 分钟时的最短路径。</p>
+<div class="ch-foot">
+<a class="ch-open" href="manual.html#ch-0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a>
+<span class="ch-pg">共 5 节</span></div>
+</article>
+<article class="ch-card reveal" id="ch-1" style="--cc:#0d9488">
+<div class="ch-top"><div class="ch-no">01</div><h3>开工之前：环境、IDE 与通用约定</h3></div>
+<p>Python 安装五步、虚拟环境一次配好五处通用、VS Code 安装配置、中文字体不乱码的关键与首次运行自检清单。</p>
+<div class="ch-foot">
+<a class="ch-open" href="manual.html#ch-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a>
+<span class="ch-pg">共 10 节</span></div>
+</article>
+<article class="ch-card reveal" id="ch-2" style="--cc:#b45309">
+<div class="ch-top"><div class="ch-no">02</div><h3>项目一：货币时间价值与资本成本计算器</h3></div>
+<p>项目一：复利 / 年金 / 债权 / 股权 / WACC / 还款计划六场景逐个操作，GUI 逐项使用，七张图怎么读，数值自检与「从零动手」重写路径。</p>
+<div class="ch-foot">
+<a class="ch-open" href="manual.html#ch-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a>
+<span class="ch-pg">共 14 节</span></div>
+</article>
+<article class="ch-card reveal" id="ch-3" style="--cc:#c2412c">
+<div class="ch-top"><div class="ch-no">03</div><h3>项目二：投资项目全流程评价系统</h3></div>
+<p>项目二：判据选择（NPV / IRR 该用哪个）、独立 / 互斥 / 资本限额 / 多重 IRR / 敏感性六大案例，以及图表命名规则与 57 个测试。</p>
+<div class="ch-foot">
+<a class="ch-open" href="manual.html#ch-3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a>
+<span class="ch-pg">共 17 节</span></div>
+</article>
+<article class="ch-card reveal" id="ch-4" style="--cc:#6d28d9">
+<div class="ch-top"><div class="ch-no">04</div><h3>项目三：综合成本与经营决策分析平台</h3></div>
+<p>项目三：恒信公司数据底座上的十三个步骤——费用分配、ABC、三种成本法、标准差异、本量利与五类经营决策；会计舍入纪律。</p>
+<div class="ch-foot">
+<a class="ch-open" href="manual.html#ch-4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a>
+<span class="ch-pg">共 12 节</span></div>
+</article>
+<article class="ch-card reveal" id="ch-5" style="--cc:#0e7490">
+<div class="ch-top"><div class="ch-no">05</div><h3>项目四：财务报表分析报告（美的集团 000333.SZ）</h3></div>
+<p>项目四：美的集团三张报表，先做数据质量校验，再共同比结构、定基 / CAGR 趋势、五类 40 项指标与杜邦三 / 五因素拆解。</p>
+<div class="ch-foot">
+<a class="ch-open" href="manual.html#ch-5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a>
+<span class="ch-pg">共 13 节</span></div>
+</article>
+<article class="ch-card reveal" id="ch-6" style="--cc:#be185d">
+<div class="ch-top"><div class="ch-no">06</div><h3>项目五：财务预测与预算管理（永鼎股份 600105）</h3></div>
+<p>项目五：永鼎股份 44 期面板，三层递进预测（含回测）、2026 年八件套预算、情景三档与敏感性矩阵，16 张图表清单。</p>
+<div class="ch-foot">
+<a class="ch-open" href="manual.html#ch-6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a>
+<span class="ch-pg">共 15 节</span></div>
+</article>
+<article class="ch-card reveal" id="ch-7" style="--cc:#4d7c0f">
+<div class="ch-top"><div class="ch-no">07</div><h3>把程序结果写成一份能得高分的实践报告</h3></div>
+<p>把程序结果写成能得高分的实践报告：评分表逐条拆解、报告固定骨架、分析段句式、提交前最后检查。</p>
+<div class="ch-foot">
+<a class="ch-open" href="manual.html#ch-7"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a>
+<span class="ch-pg">共 7 节</span></div>
+</article>
+<article class="ch-card reveal" id="ch-8" style="--cc:#0f5c8f">
+<div class="ch-top"><div class="ch-no">08</div><h3>排障总表：五个项目的报错一次查完</h3></div>
+<p>排障总表：排查固定顺序、通用类问题、分项目定位表，以及「数字看着不对」的专用检查法。</p>
+<div class="ch-foot">
+<a class="ch-open" href="manual.html#ch-8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a>
+<span class="ch-pg">共 4 节</span></div>
+</article>
+<article class="ch-card reveal" id="ch-9" style="--cc:#0d9488">
+<div class="ch-top"><div class="ch-no">09</div><h3>附录</h3></div>
+<p>附录 A–D 速查四件：命令速查、公式与判据总表、五个项目的产物清单、提交前自检清单。</p>
+<div class="ch-foot">
+<a class="ch-open" href="manual.html#ch-9"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a>
+<span class="ch-pg">共 4 节</span></div>
+</article>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:auto" class="reveal">
+      <table class="apx-table">
+        <thead><tr><th style="width:84px">附录</th><th>内容</th><th style="width:132px">在线阅读</th></tr></thead>
+        <tbody>
+<tr><td>附录 A</td><td><b>命令速查</b></td><td><a class="ch-open apx-link" href="manual.html#s-9-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a></td></tr>
+<tr><td>附录 B</td><td><b>公式与判据总表</b></td><td><a class="ch-open apx-link" href="manual.html#s-9-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a></td></tr>
+<tr><td>附录 C</td><td><b>五个项目的产物清单</b></td><td><a class="ch-open apx-link" href="manual.html#s-9-3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a></td></tr>
+<tr><td>附录 D</td><td><b>提交前自检清单</b></td><td><a class="ch-open apx-link" href="manual.html#s-9-4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a></td></tr>
+<tr><td>附录 E</td><td><b>通用方法：从零写任何一个财务 Python 项目</b></td><td><a class="ch-open apx-link" href="manual.html#ap-e"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a></td></tr>
+<tr><td>附录 F</td><td><b>五个项目用到的 Python 要素清单</b></td><td><a class="ch-open apx-link" href="manual.html#ap-f"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a></td></tr>
+<tr><td>附录 G</td><td><b>演示截图补位清单</b></td><td><a class="ch-open apx-link" href="manual.html#ap-g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a></td></tr>
+<tr><td>附录 H</td><td><b>数据可视化基础：把财务数字画成能看懂的图</b></td><td><a class="ch-open apx-link" href="manual.html#ap-h"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a></td></tr>
+<tr><td>附录 I</td><td><b>GUI 设计基础：用 tkinter 给计算器做界面</b></td><td><a class="ch-open apx-link" href="manual.html#ap-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a></td></tr>
+<tr><td>附录 J</td><td><b>数据采集与处理基础：从“拿到数”到“能用数”</b></td><td><a class="ch-open apx-link" href="manual.html#ap-j"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a></td></tr>
+<tr><td>附录 K</td><td><b>分析方法论：商业数据分析五步法与五个项目的对应</b></td><td><a class="ch-open apx-link" href="manual.html#ap-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 在线阅读</a></td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -433,35 +535,50 @@ python main.py</pre>
   <div class="container">
     <div class="sec-head reveal">
       <div class="sec-eyebrow">Course Report</div>
-      <h2>课程实践报告 <span style="color:var(--text-3);font-weight:600;font-size:.62em;vertical-align:middle">report/</span></h2>
-      <p>课程下发的报告模板与按模板完成的成稿（Word / PDF）。如何写出能得高分的实践报告，见<a href="manual.html#ch7">手册第 7 章</a>。</p>
+      <h2>实践报告怎么写 <span style="color:var(--text-3);font-weight:600;font-size:.62em;vertical-align:middle">手册第 7 章</span></h2>
+      <p>课程评分表把 60% 的分值压在报告表达上。下面按手册第 7 章的顺序排成六步，从看清评分表到提交前的最后检查。</p>
     </div>
     <div class="grid-3">
 <div class="tile reveal" style="--tc:#b45309">
-<div class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg></div>
-<h3>报告模板（课程下发）</h3>
-<p>《Python 在财务管理中的应用》实践报告模板。</p>
-<div class="tile-links"><a href="report/%E3%80%8APython%E5%9C%A8%E8%B4%A2%E5%8A%A1%E7%AE%A1%E7%90%86%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E3%80%8B%E5%AE%9E%E8%B7%B5%E6%8A%A5%E5%91%8A-%E6%A8%A1%E6%9D%BF.docx" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg> 下载 · 92 KB</a></div>
-<span class="size">DOCX · 92 KB</span>
-</div>
+<div class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+<h3>① 先看清评分表</h3>
+<p>任务完成度 40%、代码质量 20%、图表截图 15%、分析阐述 15%、规范性 10%——五档分值逐条怎么挣。</p>
+<div class="tile-links"><a href="manual.html#s-7-1">在手册中阅读 ↗</a></div>
+<span class="size">操作手册 · 第 7 章</span></div>
 <div class="tile reveal" style="--tc:#0f5c8f">
-<div class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg></div>
-<h3>实践报告 · 成稿 DOCX</h3>
-<p>按模板完成的课程实践报告，可编辑。</p>
-<div class="tile-links"><a href="report/%E3%80%8APython%E5%9C%A8%E8%B4%A2%E5%8A%A1%E7%AE%A1%E7%90%86%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E3%80%8B%E5%AE%9E%E8%B7%B5%E6%8A%A5%E5%91%8A_%E6%BB%95%E5%AE%87%E8%B1%AA_12607320270457.docx" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg> 下载 · 1.8 MB</a></div>
-<span class="size">DOCX · 1.8 MB</span>
-</div>
-<div class="tile reveal" style="--tc:#c2412c">
-<div class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg></div>
-<h3>实践报告 · 成稿 PDF</h3>
-<p>定稿排版版本，适合打印与提交。</p>
-<div class="tile-links"><a href="report/%E3%80%8APython%E5%9C%A8%E8%B4%A2%E5%8A%A1%E7%AE%A1%E7%90%86%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E3%80%8B%E5%AE%9E%E8%B7%B5%E6%8A%A5%E5%91%8A_%E6%BB%95%E5%AE%87%E8%B1%AA_12607320270457.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg> 下载 · 1.8 MB</a></div>
-<span class="size">PDF · 1.8 MB</span>
-</div>
+<div class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+<h3>② 报告的固定骨架</h3>
+<p>模板规定的四个正文部分与顺序，以及「题目原文须先抄进报告」这类容易被判不合格的硬性要求。</p>
+<div class="tile-links"><a href="manual.html#s-7-2">在手册中阅读 ↗</a></div>
+<span class="size">操作手册 · 第 7 章</span></div>
+<div class="tile reveal" style="--tc:#0d9488">
+<div class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+<h3>③ 目的与任务怎么写</h3>
+<p>五个项目的官方任务表述如何展开成「复述要求 → 实现范围 → 技术路线」。</p>
+<div class="tile-links"><a href="manual.html#s-7-3">在手册中阅读 ↗</a></div>
+<span class="size">操作手册 · 第 7 章</span></div>
+<div class="tile reveal" style="--tc:#6d28d9">
+<div class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+<h3>④ 分析段的可套用句式</h3>
+<p>每张图表后面那段「这说明什么」怎么写，避免只写「如图所示」而丢掉 15% 的分。</p>
+<div class="tile-links"><a href="manual.html#s-7-5">在手册中阅读 ↗</a></div>
+<span class="size">操作手册 · 第 7 章</span></div>
+<div class="tile reveal" style="--tc:#be185d">
+<div class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+<h3>⑤ 收获与问题不作套话</h3>
+<p>第三、四部分要求写自我反思与真实问题，手册给了可直接改写的写法。</p>
+<div class="tile-links"><a href="manual.html#s-7-6">在手册中阅读 ↗</a></div>
+<span class="size">操作手册 · 第 7 章</span></div>
+<div class="tile reveal" style="--tc:#4d7c0f">
+<div class="tile-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+<h3>⑥ 提交前的最后检查</h3>
+<p>排版、图表编号、单位声明与文件格式的收口清单，交作业前逐项过一遍。</p>
+<div class="tile-links"><a href="manual.html#s-7-7">在手册中阅读 ↗</a></div>
+<span class="size">操作手册 · 第 7 章</span></div>
     </div>
     <div class="callout reveal">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      <div><b>说明</b>：课件与案例资料来源于公开课程材料，仅用于学习交流；仓库整体以<b>木兰宽松许可证（第 2 版）</b>开源，商用前请查阅 LICENSE。</div>
+      <div><b>说明</b>：课程下发的报告模板与个人成稿含姓名、学号等信息，已排除在版本控制之外（见 <code>.gitignore</code> 中的 <code>reports/</code>），因此不在本站提供下载；课件与案例资料来源于公开课程材料，仅用于学习交流。仓库整体以<b>木兰宽松许可证（第 2 版）</b>开源，商用前请查阅 LICENSE。</div>
     </div>
   </div>
 </section>

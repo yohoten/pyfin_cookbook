@@ -17,7 +17,8 @@
   /* ---------- 代码复制 ---------- */
   document.querySelectorAll(".copy-btn").forEach(function (btn) {
     btn.addEventListener("click", function () {
-      var pre = btn.parentElement.querySelector("pre");
+      var scope = btn.closest(".code-wrap") || btn.parentElement;
+      var pre = scope.querySelector("pre");
       var text = pre ? pre.innerText : "";
       var done = function () {
         var old = btn.innerHTML;
@@ -53,44 +54,6 @@
   setTimeout(function () {
     document.querySelectorAll(".reveal:not(.in)").forEach(function (el) { el.classList.add("in"); });
   }, 3000);
-
-  /* ---------- 手册阅读器 ---------- */
-  var viewer = document.getElementById("pdf-viewer");
-  if (viewer) {
-    var MAXP = parseInt(viewer.getAttribute("data-max") || "194", 10);
-    var input = document.getElementById("rb-page");
-    var prev = document.getElementById("rb-prev");
-    var next = document.getElementById("rb-next");
-    var base = viewer.getAttribute("data-pdf");
-    var cur = 1;
-
-    function clamp(p) { return Math.min(MAXP, Math.max(1, p)); }
-    function render() {
-      viewer.src = base + "#page=" + cur + "&zoom=page-width";
-      if (input) input.value = cur;
-      if (prev) prev.disabled = cur <= 1;
-      if (next) next.disabled = cur >= MAXP;
-    }
-    function goto(p, scroll) {
-      cur = clamp(p); render();
-      if (scroll !== false) {
-        viewer.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-    if (prev) prev.addEventListener("click", function () { goto(cur - 1, false); });
-    if (next) next.addEventListener("click", function () { goto(cur + 1, false); });
-    if (input) input.addEventListener("change", function () { goto(parseInt(input.value, 10) || 1, false); });
-    window.pfGotoPage = goto;   // 供章节跳转调用
-  }
-
-  /* 章节卡片 → 阅读器内跳页（无 JS 时退化为新标签页直开 PDF 对应页） */
-  document.querySelectorAll("[data-page]").forEach(function (a) {
-    a.addEventListener("click", function (e) {
-      if (!window.pfGotoPage) return;
-      e.preventDefault();
-      window.pfGotoPage(parseInt(a.getAttribute("data-page"), 10) || 1, true);
-    });
-  });
 
   /* ---------- 课件手风琴：仅允许展开一个（保持页面紧凑） ---------- */
   var cwAll = document.querySelectorAll(".cw-chapter");

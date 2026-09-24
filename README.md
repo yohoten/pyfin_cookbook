@@ -3,6 +3,7 @@
 本仓库是《Python 在财务管理中的应用》课程的学习实践合集，包含课程课件、随堂代码、财务领域实用脚本、5 个综合实验项目，以及配套编写的项目操作手册。
 
 - **代码托管**：GitHub（远程名 `origin`）与 Gitee（远程名 `gitee`）双远程，主分支 `main`
+- **在线主页**：[GitHub Pages 介绍网站](https://yohoten.github.io/pyfin_cookbook/)（仓库根目录 `index.html`；手册阅读页为 `manual.html`）
 - **开源许可**：[木兰宽松许可证，第 2 版](LICENSE)（Mulan PSL v2）
 - **子模块**：01、03、05 三个综合项目以 Git 子模块形式引入，克隆后需额外初始化（见「快速开始」）
 
